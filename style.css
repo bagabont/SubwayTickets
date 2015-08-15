@@ -1,26 +1,28 @@
 #calendar {
-	width: 40%;
+	width: 30%;
 	float: left;
 }
 #calendar #header {
-	font-size: 28px;
+	font-size: 24px;
 	text-align: center;
 	padding: 10px;
 	width: 80%;
 	margin: 0 auto;
 }
-#calendar #header #btn-prev {
+#calendar #btn-prev {
 	float: left;
+	margin-left: 15%;
 }
-#calendar #header #btn-next {
+#calendar #btn-next {
 	float: right;
+	margin-right: 15%;
 }
-#calendar #header #btn-prev:hover,#btn-next:hover {
+#calendar #btn-prev:hover,#btn-next:hover {
 	background-color: lime;
 	border-radius: 10px;
 	cursor: pointer;
 }
-#calendar #header #current-month:hover {
+#calendar #current-month:hover {
 	text-decoration: underline;
 }
 #calendar table {
@@ -37,7 +39,7 @@
 }
 #calendar th {
 	border-bottom: solid 3px black;
-	background-color: gray;
+	background-color: lightgray;
 }
 #calendar td.curr-month {
 }
