@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="style.css" rel="stylesheet">
+		<script src="main.js"></script>
+	</head>
+	<body onload="init()">
+		<div id="calendar">
+			<div id="header">
+				<span id="current-month">August 2015</span>
+				<span id="btn-prev">&lt;&lt;</span>
+				<span id="btn-next">&gt;&gt;</span>
+			</div>
+			<table></table>
+		</div>
+		<div id="results">
+			<div id="selected-date"></div>
+			<div id="result-codes"></div>
+		</div>
+
+		<div id="debug" style="margin-left: 50px; float: left;">
+			<p><strong>Custom time (for debugging)</strong></p>
+			<p>HH:MM:SS-XXX</p>
+			<input id="custom-date" size=30>
+		</div>
+	</body>
+</html>
