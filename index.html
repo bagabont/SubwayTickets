@@ -16,9 +16,11 @@
 		</div>
 		<div id="timepick">
 			<div id="selected-date"></div>
-			От&nbsp;<input size="4" value="00:00">часа<br>
-			До&nbsp;<input size="4" value="23:59">часа<br>
-			На всеки <input size="1" value="30"> минути<br>
+			<p>
+				От <input size="4" id="time_from" value="00:00">
+				до <input size="4" id="time_to" value="23:59"> часа,<br>
+				на всеки <input size="1" id="time_interval" value="30"> минути
+			</p>
 			<select id="station">
 				<option value="01">Метростанция 1</option>
 				<option value="02">Метростанция 2</option>
@@ -41,7 +43,10 @@
 				<option value="19">Метростанция 19</option>
 				<option value="20">Метростанция 20</option>
 			</select>
+			<input type="button" value="Print">
 		</div>
-		<canvas id="canvas"></canvas>
+		<div id="canvas-container">
+			<canvas id="canvas"></canvas>
+		</div>
 	</body>
 </html>

@@ -53,19 +53,23 @@
 }
 
 #timepick {
-	/* width: 15%; */
+	width: 15%;
 	float: left;
 }
 #timepick #selected-date {
 	font-size: 24px;
 	padding: 10px;
 }
-#timepick input {
+/*#timepick input {
 	color: black;
 	background-color: white;
 	border: none;
-}
+}*/
 
-#canvas {
-	border: solid 1px;
+#canvas-container {
+	float: left;
+	padding: 20px;
+	width: 50%;
+	height: 80vh;
+	overflow: scroll;
 }
