@@ -18,7 +18,7 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 function init() {
 	canvas = document.querySelector('#canvas');
-	canvas.width = 800;
+	canvas.width = 780;
 	canvas.height = canvas.width*Math.sqrt(2);
 	ctx = canvas.getContext('2d');
 
@@ -89,6 +89,13 @@ function setDate(date) {
 	draw();
 }
 
+function leadWithZeroes(x, z) {
+	x = x + '';
+	while(x.length < z)
+		x = '0' + x;
+	return x;
+};
+
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.globalAlpha = 1;
@@ -104,11 +111,18 @@ function draw() {
 
 	while(from <= to) {
 		var code = genCode(selectedDate, from, station, 1);
+		var text = leadWithZeroes(selectedDate.getDate(), 2) + '.'
+			+ leadWithZeroes(selectedDate.getMonth()+1, 2) + '.'
+			+ leadWithZeroes(selectedDate.getFullYear()) + '-'
+			+ leadWithZeroes(from/3600|0, 2) + ':'
+			+ leadWithZeroes((from/60|0)%60, 2) + ':'
+			+ leadWithZeroes(from%60, 2) + ' 1';
 		ctx.drawImage(ticket, offx, offy, 140, 300);
-		drawBarcode(code, offx+27, offy+18, 1, 40);
+		ctx.fillText(text, offx+21, offy+18+10+35);
+		drawBarcode(code, offx+27, offy+18, 1, 35);
 		from += step;
 		offx += 160;
-		if(offx > canvas.width - 130) {
+		if(offx > canvas.width - 170) {
 			offx = 10;
 			offy += 320;
 			if(offy > canvas.height - 50)
@@ -121,11 +135,10 @@ function draw() {
 
 function genCode(date, seconds, station, id) {
 	var origin = new Date(2014, 2, 6);
-	var days = Math.round((date-origin)/86400000) + '';
-	while(days.length < 3) days = '0' + days;
+	var days = Math.round((date-origin)/86400000);
+	days = leadWithZeroes(days, 3);
 
-	var seconds = seconds + '';
-	while(seconds.length < 5) seconds = '0' + seconds;
+	seconds = leadWithZeroes(seconds, 5);
 
 	var code = days + seconds + station + id;
 	var checksum = 0;
