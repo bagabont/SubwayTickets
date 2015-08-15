@@ -53,7 +53,7 @@
 }
 
 #timepick {
-	width: 30%;
+	/* width: 15%; */
 	float: left;
 }
 #timepick #selected-date {
@@ -64,4 +64,8 @@
 	color: black;
 	background-color: white;
 	border: none;
+}
+
+#canvas {
+	border: solid 1px;
 }

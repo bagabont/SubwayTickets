@@ -2,20 +2,26 @@ var WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 var selectedDate;
+var canvas, ctx;
+
+var requestAnimationFrame = window.requestAnimationFrame ||
+	window.mozRequestAnimationFrame ||
+	window.webkitRequestAnimationFrame ||
+	window.msRequestAnimationFrame ||
+	function (callback) { setTimeout (callback, 1000/30); };
 
 function init() {
-	var container = document.querySelector('#datepick');
-	var table = container.querySelector('table');
+	var datepick = document.querySelector('#datepick');
+	var table = datepick.querySelector('table');
 	var date = new Date();
-
 	setDate(date);
 
-	container.querySelector('#btn-prev')
+	datepick.querySelector('#btn-prev')
 		.addEventListener('click', function() {
 		date.setMonth(date.getMonth()-2);
 		fillTable(date, table);
 	})
-	container.querySelector('#btn-next')
+	datepick.querySelector('#btn-next')
 		.addEventListener('click', function() {
 		date.setMonth(date.getMonth());
 		fillTable(date, table);
@@ -26,6 +32,12 @@ function init() {
 		if(ev.target.className === 'curr-month')
 			setDate(ev.target.id);
 	});
+
+	canvas = document.querySelector('#canvas');
+	canvas.width = 600;
+	canvas.height = canvas.width*Math.sqrt(2);
+	ctx = canvas.getContext('2d');
+	draw();
 }
 
 function fillTable(date, table) {
@@ -63,4 +75,12 @@ function setDate(date) {
 		selectedDate.getDate() + ' ' +
 		MONTHS[selectedDate.getMonth()] + ' ' +
 		selectedDate.getFullYear();
+}
+
+function draw() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.globalAlpha = 1;
+	ctx.fillStyle = '#000000';
+
+	requestAnimationFrame(draw);
 }
