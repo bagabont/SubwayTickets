@@ -28,10 +28,10 @@ function init() {
 	date.setHours(0);
 	setDate(date);
 
-	document.querySelector('#timepick')
-		.addEventListener('keyup', function() {
-			draw();
-	});
+	document.querySelector('#time_from').addEventListener('keyup', draw);
+	document.querySelector('#time_to').addEventListener('keyup', draw);
+	document.querySelector('#time_interval').addEventListener('keyup', draw);
+	document.querySelector('#station').addEventListener('change', draw);
 
 	datepick.querySelector('#btn-prev')
 		.addEventListener('click', function() {
@@ -82,11 +82,11 @@ function fillTable(date, table) {
 
 function setDate(date) {
 	selectedDate = new Date(date + '');
-	draw();
 	document.querySelector('#selected-date').innerHTML =
 		selectedDate.getDate() + ' ' +
 		MONTHS[selectedDate.getMonth()] + ' ' +
 		selectedDate.getFullYear();
+	draw();
 }
 
 function draw() {
@@ -106,16 +106,17 @@ function draw() {
 		var code = genCode(selectedDate, from, station, 1);
 		ctx.drawImage(ticket, offx, offy, 140, 300);
 		drawBarcode(code, offx+27, offy+18, 1, 40);
-		console.log(from);
 		from += step;
 		offx += 160;
 		if(offx > canvas.width - 130) {
 			offx = 10;
 			offy += 320;
 			if(offy > canvas.height - 50)
-				return;
+				break;
 		}
 	}
+
+	document.querySelector('#download').href = canvas.toDataURL('images/png');
 }
 
 function genCode(date, seconds, station, id) {
