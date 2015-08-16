@@ -4,6 +4,10 @@ var DIGITS = [
 	[3, 2, 1, 1], [2, 2, 2, 1], [2, 1, 2, 2], [1, 4, 1, 1], [1, 1, 3, 2],
 	[1, 2, 3, 1], [1, 1, 1, 4], [1, 3, 1, 2], [1, 2, 1, 3], [3, 1, 1, 2],
 ];
+var MM = 96/25.4; // this should be 1mm when printed
+function mm(x) {return Math.round(x*MM);} // round it to be pretty
+var TicketWidth = mm(38);
+var TicketHeight = mm(30); // 80mm originally
 
 var selectedDate;
 var canvas, ctx;
@@ -18,8 +22,8 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 
 function init() {
 	canvas = document.querySelector('#canvas');
-	canvas.width = 780;
-	canvas.height = canvas.width*Math.sqrt(2);
+	canvas.width = mm(210); // A4 paper
+	canvas.height = Math.round(canvas.width * Math.sqrt(2));
 	ctx = canvas.getContext('2d');
 
 	var datepick = document.querySelector('#datepick');
@@ -101,31 +105,38 @@ function draw() {
 	ctx.globalAlpha = 1;
 	ctx.fillStyle = '#000000';
 
+	var seconds = +document.getElementById('time_seconds').innerHTML;
+	var id = +document.getElementById('ticket_id').innerHTML;
 	var from = document.getElementById('time_from').value.split(':').map(Number);
-	from = (from[0]*60 + from[1])*60 + 0;
+	from = (from[0]*60 + from[1])*60 + seconds;
 	var to = document.getElementById('time_to').value.split(':').map(Number);
-	to = (to[0]*60 + to[1])*60 + 0;
+	to = (to[0]*60 + to[1])*60 + seconds;
 	var step = (+document.getElementById('time_interval').value)*60;
 	var station = document.getElementById('station').value;
-	var offx = 10, offy = 10;
 
+	var offx = 10, offy = 10;
 	while(from <= to) {
-		var code = genCode(selectedDate, from, station, 1);
-		var text = leadWithZeroes(selectedDate.getDate(), 2) + '.'
+		var code = genCode(selectedDate, from, station, id);
+		var textDate = leadWithZeroes(selectedDate.getDate(), 2) + '.'
 			+ leadWithZeroes(selectedDate.getMonth()+1, 2) + '.'
-			+ leadWithZeroes(selectedDate.getFullYear()) + '-'
-			+ leadWithZeroes(from/3600|0, 2) + ':'
+			+ leadWithZeroes(selectedDate.getFullYear());
+		var textTime = leadWithZeroes(from/3600|0, 2) + ':'
 			+ leadWithZeroes((from/60|0)%60, 2) + ':'
-			+ leadWithZeroes(from%60, 2) + ' 1';
-		ctx.drawImage(ticket, offx, offy, 140, 300);
-		ctx.fillText(text, offx+21, offy+18+10+35);
-		drawBarcode(code, offx+27, offy+18, 1, 35);
+			+ leadWithZeroes(from%60, 2);
+		var textStation = 'Station ' + station + ' ID ' + id;
+
+		ctx.drawImage(ticket, offx, offy, TicketWidth, TicketHeight);
+		ctx.fillText(textDate, offx+mm(7), offy+mm(18));
+		ctx.fillText(textTime, offx+mm(7), offy+mm(21));
+		ctx.fillText(textStation, offx+mm(7), offy+mm(24));
+		drawBarcode(code, offx+mm(7), offy+mm(2), 1, mm(13.5));
+
 		from += step;
-		offx += 160;
-		if(offx > canvas.width - 170) {
+		offx += TicketWidth + 10;
+		if(offx > canvas.width - TicketWidth - 10) {
 			offx = 10;
-			offy += 320;
-			if(offy > canvas.height - 50)
+			offy += TicketHeight + 10;
+			if(offy > canvas.height - TicketHeight - 10)
 				break;
 		}
 	}

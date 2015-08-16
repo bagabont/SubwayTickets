@@ -66,14 +66,8 @@
 	border: none;
 }*/
 
-#canvas-container {
-	float: left;
-	padding: 20px;
-	width: 50%;
-	height: 80vh;
-	overflow: scroll;
+#canvas {
+	border: solid 1px;
+	max-width: 50vw;
+	max-height: 80vh;
 }
-/*#canvas {
-	width: 21cm;
-	height: 29.7cm;
-}*/
