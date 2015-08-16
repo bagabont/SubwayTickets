@@ -32,6 +32,8 @@ function init() {
 	date.setHours(0);
 	setDate(date);
 
+	document.querySelector('#time_seconds').addEventListener('keyup', draw);
+	document.querySelector('#ticket_id').addEventListener('keyup', draw);
 	document.querySelector('#time_from').addEventListener('keyup', draw);
 	document.querySelector('#time_to').addEventListener('keyup', draw);
 	document.querySelector('#time_interval').addEventListener('keyup', draw);
@@ -105,8 +107,8 @@ function draw() {
 	ctx.globalAlpha = 1;
 	ctx.fillStyle = '#000000';
 
-	var seconds = +document.getElementById('time_seconds').innerHTML;
-	var id = +document.getElementById('ticket_id').innerHTML;
+	var seconds = +document.getElementById('time_seconds').value;
+	var id = +document.getElementById('ticket_id').value;
 	var from = document.getElementById('time_from').value.split(':').map(Number);
 	from = (from[0]*60 + from[1])*60 + seconds;
 	var to = document.getElementById('time_to').value.split(':').map(Number);
