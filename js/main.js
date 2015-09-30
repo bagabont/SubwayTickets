@@ -1,9 +1,5 @@
 var WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-var DIGITS = [
-	[3, 2, 1, 1], [2, 2, 2, 1], [2, 1, 2, 2], [1, 4, 1, 1], [1, 1, 3, 2],
-	[1, 2, 3, 1], [1, 1, 1, 4], [1, 3, 1, 2], [1, 2, 1, 3], [3, 1, 1, 2],
-];
 var MM = 96/25.4; // this should be 1mm when printed
 function mm(x) {return Math.round(x*MM);} // round it to be pretty
 var TicketWidth = mm(38);
@@ -162,23 +158,4 @@ function genCode(date, seconds, station, id) {
 	}
 	code += checksum*9%10;
 	return code;
-}
-
-function drawBarcode(code, x, y, mwidth, height) {
-	var black = true;
-	function show(arr) {
-		arr.forEach(function(w) {
-			if(black)
-				ctx.fillRect(x, y, w*mwidth, height);
-			black = !black;
-			x += w*mwidth;
-		});
-	}
-	show([1, 1, 1]);
-	for(var i=0; i<6; ++i)
-		show(DIGITS[+code[i]]);
-	show([1, 1, 1, 1, 1]);
-	for(var i=6; i<12; ++i)
-		show(DIGITS[+code[i]]);
-	show([1, 1, 1]);
 }
