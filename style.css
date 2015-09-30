@@ -1,7 +1,8 @@
-#datepick {
-	width: 25%;
+#pick {
+	width: 40%;
 	float: left;
 }
+
 #datepick #header {
 	font-size: 24px;
 	text-align: center;
@@ -53,12 +54,10 @@
 }
 
 #timepick {
-	width: 15%;
-	float: left;
+	padding: 40px;
 }
 #timepick #selected-date {
 	font-size: 24px;
-	padding: 10px;
 }
 /*#timepick input {
 	color: black;

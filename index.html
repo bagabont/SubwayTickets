@@ -7,66 +7,67 @@
 		<script src="js/barcode.js"></script>
 	</head>
 	<body onload="init()">
-		<div id="datepick">
-			<div id="header">
-				<span id="current-month"></span>
-				<span id="btn-prev">&lt;&lt;</span>
-				<span id="btn-next">&gt;&gt;</span>
+		<div id="pick">
+			<div id="datepick">
+				<div id="header">
+					<span id="current-month"></span>
+					<span id="btn-prev">&lt;&lt;</span>
+					<span id="btn-next">&gt;&gt;</span>
+				</div>
+				<table></table>
 			</div>
-			<table></table>
+			<div id="timepick">
+				<div id="selected-date"></div>
+				<p>
+					От <input size="4" id="time_from" value="00:00">
+					до <input size="4" id="time_to" value="23:59"> часа,
+					на всеки <input size="1" id="time_interval" value="30"> минути
+					/ <input size="2" id="time_seconds" value="00"> секунда<br>
+				</p>
+				<select id="station">
+					<option value="00">Обеля</option>
+					<option value="01">Сливница</option>
+					<option value="02">Люлин</option>
+					<option value="03">Западен парк</option>
+					<option value="04">Вардар</option>
+					<option value="05">Константин Величков</option>
+					<option value="06">Опълченска</option>
+					<option value="07">Сердика I</option>
+					<option value="08">СУ "Климент Охридски"</option>
+					<option value="09">Стадион "Васил Левски"</option>
+					<option value="10">Жолио Кюри</option>
+					<option value="11">Г.М. Димитров</option>
+					<option value="12">Мусагеница</option>
+					<option value="13">Младост 1</option>
+
+					<option value="14">Александър Малинов</option>
+					<option value="15">Акад. Ал. Теодоров - Балан</option>
+					<option value="16">Бизнес парк</option>
+
+					<option value="18">Младост 3</option>
+					<option value="19">Цариградско шосе</option>
+					<option value="20">Дружба</option>
+					<option value="21">Искърско шосе</option>
+					<option value="21">Софийска Света гора</option>
+					<option value="22">Летище София</option>
+
+					<option value="51">Ломско шосе</option>
+					<option value="51">Бели Дунав</option>
+					<option value="52">Надежда</option>
+					<option value="53">Хан Кубрат</option>
+					<option value="54">Мария-Луиза</option>
+					<option value="55">Централна гара</option>
+					<option value="56">Лъвов мост</option>
+					<option value="57">Сердика II</option>
+					<option value="58">НДК</option>
+					<option value="59">Европейски съюз</option>
+					<option value="60">Джеймс Баучер</option>
+				</select>
+				<br>
+				Вход номер <input size="1" id="ticket_id" value="1"> (нужда от още работа)<br>
+			</div>
 		</div>
-		<div id="timepick">
-			<div id="selected-date"></div>
-			<p>
-				От <input size="4" id="time_from" value="00:00">
-				до <input size="4" id="time_to" value="23:59"> часа,<br>
-				на всеки <input size="1" id="time_interval" value="30"> минути<br>
-				Секунди <input size="2" id="time_seconds" value="00"><br>
-			</p>
-			<select id="station">
-				<option value="00">Обеля</option>
-				<option value="01">Сливница</option>
-				<option value="02">Люлин</option>
-				<option value="03">Западен парк</option>
-				<option value="04">Вардар</option>
-				<option value="05">Константин Величков</option>
-				<option value="06">Опълченска</option>
-				<option value="07">Сердика I</option>
-				<option value="08">СУ "Климент Охридски"</option>
-				<option value="09">Стадион "Васил Левски"</option>
-				<option value="10">Жолио Кюри</option>
-				<option value="11">Г.М. Димитров</option>
-				<option value="12">Мусагеница</option>
-				<option value="13">Младост 1</option>
-
-				<option value="14">Александър Малинов</option>
-				<option value="15">Акад. Ал. Теодоров - Балан</option>
-				<option value="16">Бизнес парк</option>
-
-				<option value="18">Младост 3</option>
-				<option value="19">Цариградско шосе</option>
-				<option value="20">Дружба</option>
-				<option value="21">Искърско шосе</option>
-				<option value="21">Софийска Света гора</option>
-				<option value="22">Летище София</option>
-
-				<option value="51">Ломско шосе</option>
-				<option value="51">Бели Дунав</option>
-				<option value="52">Надежда</option>
-				<option value="53">Хан Кубрат</option>
-				<option value="54">Мария-Луиза</option>
-				<option value="55">Централна гара</option>
-				<option value="56">Лъвов мост</option>
-				<option value="57">Сердика II</option>
-				<option value="58">НДК</option>
-				<option value="59">Европейски съюз</option>
-				<option value="60">Джеймс Баучер</option>
-			</select>
-			<br>
-			Вход номер <input size="1" id="ticket_id" value="1"> (нужда от още работа)<br>
-			<a href="" download="tickets.png" id="download">Download</a>
-		</div>
-		<h4>Preview:</h4>
+		<h4>Preview: <a href="" download="tickets.png" id="download">Download</a></h4>
 		<canvas id="canvas">
 Your browser doesn't support html5 canvas.
 		</canvas>
