@@ -46,7 +46,7 @@ function draw() {
 
 	var offx = 10, offy = 10;
 	while(from <= to) {
-		var code = genCode(selectedDate, from, station, id);
+		var code = barcode.generate(selectedDate, from, station, id);
 		var textDate = leadWithZeroes(selectedDate.getDate(), 2) + '.'
 			+ leadWithZeroes(selectedDate.getMonth()+1, 2) + '.'
 			+ leadWithZeroes(selectedDate.getFullYear());
@@ -59,7 +59,7 @@ function draw() {
 		ctx.fillText(textDate, offx+mm(7), offy+mm(18));
 		ctx.fillText(textTime, offx+mm(7), offy+mm(21));
 		ctx.fillText(textStation, offx+mm(7), offy+mm(24));
-		drawBarcode(code, offx+mm(7), offy+mm(2), 1, mm(13.5));
+		barcode.draw(code, offx+mm(7), offy+mm(2), 1, mm(13.5));
 
 		from += step;
 		offx += TicketWidth + 10;
@@ -72,22 +72,4 @@ function draw() {
 	}
 
 	document.querySelector('#download').href = canvas.toDataURL('images/png');
-}
-
-function genCode(date, seconds, station, id) {
-	var origin = new Date(2014, 2, 6);
-	var days = Math.round((date-origin)/86400000);
-	days = leadWithZeroes(days, 3);
-
-	seconds = leadWithZeroes(seconds, 5);
-
-	var code = days + seconds + station + id;
-	var checksum = 0;
-	for(var i in code) {
-		if((code.length-i)%2)
-			checksum += 3*(+code[i]);
-		else checksum += +code[i];
-	}
-	code += checksum*9%10;
-	return code;
 }
