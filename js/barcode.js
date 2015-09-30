@@ -5,22 +5,21 @@ var drawBarcode = function() {
 	];
 
 	var drawBarcode = function(code, x, y, mwidth, height) {
-		var black = true;
-		function show(arr) {
-			arr.forEach(function(w) {
-					if(black)
-					ctx.fillRect(x, y, w*mwidth, height);
-					black = !black;
-					x += w*mwidth;
-					});
-		}
-		show([1, 1, 1]);
+		var digits = [1, 1, 1];
 		for(var i=0; i<6; ++i)
-			show(DIGITS[+code[i]]);
-		show([1, 1, 1, 1, 1]);
+			digits = digits.concat(DIGITS[+code[i]]);
+		digits = digits.concat([1, 1, 1, 1, 1]);
 		for(var i=6; i<12; ++i)
-			show(DIGITS[+code[i]]);
-		show([1, 1, 1]);
+			digits = digits.concat(DIGITS[+code[i]]);
+		digits = digits.concat([1, 1, 1]);
+
+		var black = true;
+		digits.forEach(function(w) {
+			if(black)
+				ctx.fillRect(x, y, w*mwidth, height);
+			black = !black;
+			x += w*mwidth;
+		});
 	};
 
 	return drawBarcode;
