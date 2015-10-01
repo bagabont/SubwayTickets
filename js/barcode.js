@@ -23,7 +23,7 @@ var barcode = function() {
 		return code;
 	}
 
-	var draw = function(code, x, y, mwidth, height) {
+	var draw = function(context, code, x, y, mwidth, height) {
 		var digits = [1, 1, 1];
 		for(var i=0; i<6; ++i)
 			digits = digits.concat(UPCA_DIGITS[+code[i]]);
@@ -35,7 +35,7 @@ var barcode = function() {
 		var black = true;
 		digits.forEach(function(w) {
 			if(black)
-				ctx.fillRect(x, y, w*mwidth, height);
+				context.fillRect(x, y, w*mwidth, height);
 			black = !black;
 			x += w*mwidth;
 		});

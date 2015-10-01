@@ -37,7 +37,7 @@ var calendar = function() {
 			selectedDate.getDate() + ' ' +
 			MONTHS[selectedDate.getMonth()] + ' ' +
 			selectedDate.getFullYear();
-		draw();
+		draw.redraw();
 	}
 
 	var init = function() {
@@ -47,22 +47,22 @@ var calendar = function() {
 		date.setHours(0);
 		setDate(date);
 
-		document.querySelector('#time_seconds').addEventListener('keyup', draw);
-		document.querySelector('#ticket_id').addEventListener('keyup', draw);
-		document.querySelector('#time_from').addEventListener('keyup', draw);
-		document.querySelector('#time_to').addEventListener('keyup', draw);
-		document.querySelector('#time_interval').addEventListener('keyup', draw);
-		document.querySelector('#station').addEventListener('change', draw);
+		document.querySelector('#time_seconds').addEventListener('keyup', draw.redraw);
+		document.querySelector('#ticket_id').addEventListener('keyup', draw.redraw);
+		document.querySelector('#time_from').addEventListener('keyup', draw.redraw);
+		document.querySelector('#time_to').addEventListener('keyup', draw.redraw);
+		document.querySelector('#time_interval').addEventListener('keyup', draw.redraw);
+		document.querySelector('#station').addEventListener('change', draw.redraw);
 
 		datepick.querySelector('#btn-prev')
 			.addEventListener('click', function() {
-			date.setMonth(date.getMonth()-2);
-			fillTable(date, table);
+				date.setMonth(date.getMonth()-2);
+				fillTable(date, table);
 		})
 		datepick.querySelector('#btn-next')
 			.addEventListener('click', function() {
-			date.setMonth(date.getMonth());
-			fillTable(date, table);
+				date.setMonth(date.getMonth());
+				fillTable(date, table);
 		});
 
 		fillTable(date, table);
