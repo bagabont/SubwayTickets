@@ -8,10 +8,10 @@ var barcode = function() {
 		var origin = new Date(2014, 2, 6); // Who chose this date!? :D
 		var days = Math.round((date-origin)/(24*60*60*1000));
 
-		var code = leadWithZeroes(days, 3)
-			+ leadWithZeroes(seconds, 5)
-			+ leadWithZeroes(station, 2)
-			+ leadWithZeroes(entrance, 1);
+		var code = util.leadWithZeroes(days, 3)
+			+ util.leadWithZeroes(seconds, 5)
+			+ util.leadWithZeroes(station, 2)
+			+ util.leadWithZeroes(entrance, 1);
 
 		var checksum = 0;
 		for(var i in code) {

@@ -1,11 +1,13 @@
 var draw = function() {
 	var canvas, context;
+	var TicketWidth = util.mm(38);
+	var TicketHeight = util.mm(30); // 80mm originally
 	var ticket = document.createElement('img');
 	ticket.src = 'ticket.png';
 
 	var init = function() {
 		canvas = document.getElementById('canvas');
-		canvas.width = mm(210); // A4 paper
+		canvas.width = util.mm(210); // A4 paper
 		canvas.height = Math.round(canvas.width * Math.sqrt(2));
 		context = canvas.getContext('2d');
 	};
@@ -27,19 +29,19 @@ var draw = function() {
 		var offx = 10, offy = 10;
 		while(from <= to) {
 			var code = barcode.generate(selectedDate, from, station, id);
-			var textDate = leadWithZeroes(selectedDate.getDate(), 2) + '.'
-				+ leadWithZeroes(selectedDate.getMonth()+1, 2) + '.'
-				+ leadWithZeroes(selectedDate.getFullYear());
-			var textTime = leadWithZeroes(from/3600|0, 2) + ':'
-				+ leadWithZeroes((from/60|0)%60, 2) + ':'
-				+ leadWithZeroes(from%60, 2);
+			var textDate = util.leadWithZeroes(selectedDate.getDate(), 2) + '.'
+				+ util.leadWithZeroes(selectedDate.getMonth()+1, 2) + '.'
+				+ util.leadWithZeroes(selectedDate.getFullYear());
+			var textTime = util.leadWithZeroes(from/3600|0, 2) + ':'
+				+ util.leadWithZeroes((from/60|0)%60, 2) + ':'
+				+ util.leadWithZeroes(from%60, 2);
 			var textStation = 'Station ' + station + ' ID ' + id;
 
 			context.drawImage(ticket, offx, offy, TicketWidth, TicketHeight);
-			context.fillText(textDate, offx+mm(7), offy+mm(18));
-			context.fillText(textTime, offx+mm(7), offy+mm(21));
-			context.fillText(textStation, offx+mm(7), offy+mm(24));
-			barcode.draw(context, code, offx+mm(7), offy+mm(2), 1, mm(13.5));
+			context.fillText(textDate, offx+util.mm(7), offy+util.mm(18));
+			context.fillText(textTime, offx+util.mm(7), offy+util.mm(21));
+			context.fillText(textStation, offx+util.mm(7), offy+util.mm(24));
+			barcode.draw(context, code, offx+util.mm(7), offy+util.mm(2), 1, util.mm(13.5));
 
 			from += step;
 			offx += TicketWidth + 10;
@@ -55,7 +57,7 @@ var draw = function() {
 	};
 
 	return {
-init: init,
-		  redraw: redraw,
+		init: init,
+		redraw: redraw,
 	};
 }();
