@@ -32,11 +32,11 @@ var calendar = function() {
 	}
 
 	var setDate = function(date) {
-		selectedDate = new Date(date + '');
+		settings.date = new Date(date + '');
 		document.querySelector('#selected-date').innerHTML =
-			selectedDate.getDate() + ' ' +
-			MONTHS[selectedDate.getMonth()] + ' ' +
-			selectedDate.getFullYear();
+			settings.date.getDate() + ' ' +
+			MONTHS[settings.date.getMonth()] + ' ' +
+			settings.date.getFullYear();
 		draw.redraw();
 	}
 
