@@ -1,7 +1,7 @@
 var draw = function() {
 	var canvas, context;
 	var TicketWidth = util.mm(38);
-	var TicketHeight = util.mm(30); // 80mm originally
+	var TicketHeight = util.mm(60); // 80mm originally
 	var ticket = document.createElement('img');
 	ticket.src = 'ticket.png';
 
